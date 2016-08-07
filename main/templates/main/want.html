@@ -21,7 +21,7 @@
     </thead>
     <tbody>
       {% for restaurant in restaurants %}
-      {% if restaurant.is_active == True %}
+      {% if restaurant.is_active == True and restaurant.restaurant_type == "want" %}
       <tr>
         <th scope="row">{{ forloop.counter }}</th>
         {% if restaurant.url %}
