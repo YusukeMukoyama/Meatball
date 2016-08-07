@@ -1,1 +1,1 @@
-web: gunicorn --env DJANGO_SETTINGS_MODULE=web_app_lp.settings web_app_lp.wsgi --log-file -
+web: gunicorn --env DJANGO_SETTINGS_MODULE=meatball.settings meatball.wsgi --log-file -
