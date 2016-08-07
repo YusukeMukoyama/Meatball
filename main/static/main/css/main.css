@@ -1,0 +1,30 @@
+.jumbotron {
+  margin-bottom: 0px;
+  background-color: #F9F9F9
+}
+.title {
+  text-align:center;
+}
+.jumbotron h2 {
+  font-size:50px;
+  margin-top:107px;
+  margin-bottom:42px;
+  color:#4c5357
+}
+.jumbotron p.lead {
+  color:#5e8396;
+  margin-bottom:23px;
+  font-size:25px;
+}
+.jumbotron p.note {
+  color:#5e8396;
+  font-size:16px;
+  margin-bottom:23px;
+}
+.jumbotron .service-image {
+  border: 1px solid #E4E4E4;
+  height: 100%;
+  width: 100%;
+  margin-top: 56px;
+}
+

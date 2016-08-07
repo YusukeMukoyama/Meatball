@@ -1,0 +1,9 @@
+body {
+  @import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+  font-family: 'Noto Sans Japanese', sans-serif;
+  background-color: #F9F9F9
+}
+
+.navbar {
+  border-radius: 0;
+}
