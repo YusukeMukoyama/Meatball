@@ -1,6 +1,6 @@
 {% extends "meatball/base.html" %}
 {% load staticfiles %}
-{% block title %}All{% endblock %}
+{% block title %}visited{% endblock %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
 {% endblock %}
@@ -12,7 +12,6 @@
       <tr>
         <th>#</th>
         <th>Name</th>
-        <th>Type</th>
         <th>Scene1</th>
         <th>Scene2</th>
         <th>Station</th>
@@ -32,12 +31,6 @@
           <td><a href="{{ restaurant.url }}">{{ restaurant.name }}</a></td>
         {% else %}
           <td>{{ restaurant.name }}</td>
-        {% endif %}
-
-        {% if restaurant.restaurant_type %}
-          <td>{{ restaurant.restaurant_type }}</a></td>
-        {% else %}
-          <td>-</td>
         {% endif %}
 
         {% if restaurant.scene1 %}

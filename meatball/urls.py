@@ -14,8 +14,9 @@ urlpatterns = [
         {'template_name': 'accounts/login.html', 'authentication_form': LoginForm},
         name='login'),
     url(r'^logout$', accounts_views.logout_view, name='logout'),
-    url(r'^$', main_views.index, name="index"),
+    url(r'^index$', main_views.index, name="index"),
     url(r'^want/$', main_views.want, name="want"),
-    url(r'^gone/$', main_views.gone, name="gone"),
+    url(r'^visited/$', main_views.visited, name="visited"),
     url(r'^add/$', main_views.add, name="add"),
+    url(r'^detail/$', main_views.detail, name="detail"),
 ]

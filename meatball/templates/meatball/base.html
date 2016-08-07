@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{% endblock %} | Meatball</title>
+    <title>{% block title %}{% endblock %} - Meatball</title>
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'meatball/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'meatball/css/jquery-ui.min.css' %}">
     <link rel="stylesheet" href="{% static 'meatball/css/main.css' %}">
 
     {% block css %}
@@ -15,6 +16,7 @@
 
     <!-- Bootstrap -->
     <script src="{% static 'meatball/js/jquery.min.js' %}"></script>
+    <script src="{% static 'meatball/js/jquery-ui.min.js' %}"></script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 
     <!--[if lt IE 9]>
@@ -25,23 +27,96 @@
   </head>
 
 <body>
+<!-- Modal -->
+<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="AddModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="AddModalLabel">Add Restaurant</h4>
+      </div>
+      <form action="{% url 'add' %}" method="post">
+        {% csrf_token %}
+        <div class="modal-body">
+          <div class="form-group">
+            <select name="type" class="form-control">
+              <option value="">-- Type --</option>
+              <option value="want">Want to visit</option>
+              <option value="visited">Visited</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="name" placeholder="Name(Required)" required>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="url" placeholder="URL">
+          </div>
+          <div class="form-group">
+            <select name="scene1" class="form-control">
+              <option value="">-- Scene1 --</option>
+              <option value="dinner">Dinner</option>
+              <option value="lanch">Lanch</option>
+              <option value="coffee">Coffee</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select name="scene2" class="form-control">
+              <option value="">-- Scene2 --</option>
+              <option value="friends-few">friends(2 or 3 members)</option>
+              <option value="friends-many">friends(many members)</option>
+              <option value="business-few">Business(2 or 3 members)</option>
+              <option value="business-many">Business(many members)</option>
+              <option value="dating">Dating</option>
+              <option value="solo">Solo</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="station" placeholder="Station or Place">
+          </div>
+          <div class="form-group">
+            <input type="number" class="form-control" name="score" max="100" min="0" placeholder="Score(0-100)">
+          </div>
+          <div class="form-group">
+            <input type="number" class="form-control" name="visited-times" min="0" placeholder="Visited times">
+          </div>
+          <div class="form-group">
+            <input id="datepicker" type="text" class="form-control" name="last-visited-date" placeholder="Last visited date">
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" name="memo" rows="3" placeholder="Memo"></textarea>
+          </div>
+          <button type="submit" class="btn btn-outline-primary">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- end Modal -->
+
   <nav class="navbar navbar-dark bg-inverse">
     <a class="navbar-brand" href="{% url 'index' %}">Meatball</a>
+    <ul class="nav navbar-nav">
+      <li class="nav-item">
+        <div class="nav-link user-name">{{ user.get_username }}</div>
+      </li>
+    </ul>
     <ul class="nav navbar-nav pull-xs-right">
       <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+        <div class="nav-link" data-toggle="modal" data-target="#AddModal"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="#">全店舗<span class="sr-only">(current)</span></a>
+      <li class="nav-item {% if '/index' in request.path %}active{% endif %}">
+        <a class="nav-link" href="/index">All</a>
+      </li>
+      <li class="nav-item {% if '/visited' in request.path %}active{% endif %}">
+        <a class="nav-link" href="{% url 'visited' %}">Visited</a>
+      </li>
+      <li class="nav-item {% if '/want' in request.path %}active{% endif %}">
+        <a class="nav-link" href="{% url 'want' %}">Want to visit</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">行った</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">行きたい</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Account</a>
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
       </li>
     </ul>
   </nav>
@@ -49,12 +124,16 @@
   {% block content %}
   {% endblock %}
 
-  <hr>
   <footer>
-    <div class="text-center">
+    <hr class="footer-hr">
+    <div class="container footer-content">
       <small>&copy; 2016 &nbsp;Meatball</a></small>
     </div>
   </footer> 
 </body>
 </html>
-
+<script>
+  (function(){
+    $("#datepicker").datepicker();
+  })();
+</script>

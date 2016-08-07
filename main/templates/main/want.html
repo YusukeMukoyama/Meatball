@@ -1,21 +1,69 @@
-{% extends "corporate/base.html" %}
+{% extends "meatball/base.html" %}
 {% load staticfiles %}
-{% block title %}CreditEngine - 全ての中小事業者に最適な融資を{% endblock %}
+{% block title %}Want to visit{% endblock %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'corporate/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/main.css' %}">
 {% endblock %}
 {% block content %}
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <div class="row title">
-      <div class="col-md-5 fadeIn1">
-        <h2>CreditEngine</h2>
-        <p class="lead">全ての中小事業者に最適な融資を</p>
-        <p class="note">CreditEngineは様々な外部サービスと連携して融資審査をリアルタイムに行い、すぐに借入が可能な資金枠を提供します。</p>
-        <a class="btn btn-primary btn-lg btn-apply" href="http://ce-sample-app.herokuapp.com/signup" role="button">無料登録</a>
-      </div>
-    </div>
-  </div>
+
+<div class="container">
+  <table class="table table-sm">
+    <thead class="thead-default">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Scene1</th>
+        <th>Scene2</th>
+        <th>Station</th>
+        <th>Memo</th>
+        <th>Registration date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for restaurant in restaurants %}
+      {% if restaurant.is_active == True %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        {% if restaurant.url %}
+          <td><a href="{{ restaurant.url }}">{{ restaurant.name }}</a></td>
+        {% else %}
+          <td>{{ restaurant.name }}</td>
+        {% endif %}
+
+        {% if restaurant.scene1 %}
+          <td>{{ restaurant.scene1 }}</a></td>
+        {% else %}
+          <td>-</td>
+        {% endif %}
+
+        {% if restaurant.scene2 %}
+          <td>{{ restaurant.scene2 }}</a></td>
+        {% else %}
+          <td>-</td>
+        {% endif %}
+
+        {% if restaurant.station %}
+          <td>{{ restaurant.station }}</a></td>
+        {% else %}
+          <td>-</td>
+        {% endif %}
+
+        {% if restaurant.memo %}
+          <td>{{ restaurant.memo }}</a></td>
+        {% else %}
+          <td>-</td>
+        {% endif %}
+
+        {% if restaurant.registration_date %}
+          <td>{{ restaurant.registration_date }}</a></td>
+        {% else %}
+          <td>-</td>
+        {% endif %}
+
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 {% endblock %}
-
