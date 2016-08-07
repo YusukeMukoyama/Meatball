@@ -28,7 +28,7 @@
       <tr>
         <th scope="row">{{ forloop.counter }}</th>
         {% if restaurant.url %}
-          <td><a href="{{ restaurant.url }}">{{ restaurant.name }}</a></td>
+          <td><a href="{{ restaurant.url }} target="_blank"">{{ restaurant.name }}</a></td>
         {% else %}
           <td>{{ restaurant.name }}</td>
         {% endif %}
