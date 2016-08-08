@@ -7,6 +7,7 @@ from accounts.forms import LoginForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', accounts_views.root, name="root"),
     url(r'^signup$', accounts_views.signup, name="signup"),
     # url(r'^signup/', include('registration.backends.default.urls')),
     url(r'^regist_save$', accounts_views.regist_save, name='regist_save'),

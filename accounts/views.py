@@ -11,6 +11,10 @@ def signup(request):
     return render(request, 'accounts/regist.html', context)
 
 
+def root(request):
+    return redirect('login')
+
+
 def logout_view(request):
     logout(request)
     return redirect('login')
